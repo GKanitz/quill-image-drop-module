@@ -1,3 +1,5 @@
+import defaultsDeep from 'lodash/defaultsDeep';
+import DefaultOptions from './DefaultOptions';
 /**
  * Custom module for quilljs to allow user to drag images from their file system into the editor
  * and paste images from clipboard (Works on Chrome, Firefox, Edge, not on Safari)
@@ -13,6 +15,10 @@ export class ImageDrop {
 	constructor(quill, options = {}) {
 		// save the quill reference
 		this.quill = quill;
+
+        // Apply options to default options
+        this.options = defaultsDeep({}, options, DefaultOptions);
+
 		// bind handlers to this instance
 		this.handleDrop = this.handleDrop.bind(this);
 		this.handlePaste = this.handlePaste.bind(this);
@@ -66,7 +72,11 @@ export class ImageDrop {
 	 */
 	insert(dataUrl) {
 		const index = (this.quill.getSelection() || {}).index || this.quill.getLength();
-		this.quill.insertEmbed(index, 'image', dataUrl, 'user');
+		if(this.options.callback !== null) {
+            this.options.callback(dataUrl);
+        } else {
+            this.quill.insertEmbed(index, 'image', dataUrl, 'user');
+		}
 	}
 
 	/**

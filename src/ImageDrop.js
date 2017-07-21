@@ -72,6 +72,7 @@ export class ImageDrop {
 	 */
 	insert(dataUrl) {
 		const index = (this.quill.getSelection() || {}).index || this.quill.getLength();
+		console.log(options);
 		if(this.options.callback !== null) {
             this.options.callback(dataUrl);
         } else {

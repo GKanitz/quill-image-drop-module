@@ -18,6 +18,7 @@ export class ImageDrop {
 
         // Apply options to default options
         // this.options = defaultsDeep({}, options, DefaultOptions);
+        this.options = options;
 
 		// bind handlers to this instance
 		this.handleDrop = this.handleDrop.bind(this);

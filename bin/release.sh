@@ -2,7 +2,7 @@
 
 dir="$(dirname "${BASH_SOURCE[0]}")/.."
 # Copy ES6 source file
-cp $dir/src/ImageDrop.js $dir/index.js
+cp $dir/src/ImageDrop.js $dir/image-drop.js
 # Copy the template
 cp $dir/src/es5-wrapper.js $dir/image-drop.min.js
 # Compile to ES5

@@ -2,7 +2,7 @@
   "name": "quill-image-drop-module",
   "version": "1.0.3",
   "description": "A module for Quill rich text editor to allow images to be pasted and drag/dropped into the editor.",
-  "main": "index.js",
+  "main": "image-drop.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "webpack -p --progress --colors",

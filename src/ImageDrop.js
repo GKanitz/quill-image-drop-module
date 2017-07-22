@@ -17,7 +17,7 @@ export class ImageDrop {
 		this.quill = quill;
 
         // Apply options to default options
-        this.options = defaultsDeep({}, options, DefaultOptions);
+        // this.options = defaultsDeep({}, options, DefaultOptions);
 
 		// bind handlers to this instance
 		this.handleDrop = this.handleDrop.bind(this);

@@ -32,6 +32,7 @@ export class ImageDrop {
 	 * @param {Event} evt
 	 */
 	handleDrop(evt) {
+        console.log('drop: ' + options);
 		evt.preventDefault();
 		if (evt.dataTransfer && evt.dataTransfer.files && evt.dataTransfer.files.length) {
 			if (document.caretRangeFromPoint) {
@@ -50,6 +51,7 @@ export class ImageDrop {
 	 * @param {Event} evt
 	 */
 	handlePaste(evt) {
+        console.log('paste: ' + options);
 		if (evt.clipboardData && evt.clipboardData.items && evt.clipboardData.items.length) {
 			this.readFiles(evt.clipboardData.items, dataUrl => {
 				const selection = this.quill.getSelection();

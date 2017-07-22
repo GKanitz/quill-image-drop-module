@@ -1,5 +1,4 @@
 var path = require('path');
-const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin')
 
 module.exports = {
     entry: "./src/ImageDrop.js",
@@ -30,8 +29,5 @@ module.exports = {
                 }]
             }
         ]
-    },
-    plugins: [
-        //new UglifyJsPlugin()
-    ]
+    }
 };

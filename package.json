@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "webpack -p --progress --colors",
-    "dev": "webpack --progress --colors --watch"
+    "dev": "webpack --progress --colors --watch",
+    "lint": "eslint --ext js,es6 src",
+    "fixlint": "eslint --fix --ext js,es6 src"
   },
   "repository": {
     "type": "git",
@@ -40,11 +42,11 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
-    "webpack": "^2.3.3",
-    "uglify-js": "^2.8.13"
+    "webpack": "^2.3.3"
   },
   "dependencies": {
     "lodash": "^4.17.4",
-    "quill": "^1.2.2"
+    "quill": "^1.2.2",
+    "raw-loader": "^0.5.1"
   }
 }

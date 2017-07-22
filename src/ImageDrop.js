@@ -5,7 +5,7 @@ import DefaultOptions from './DefaultOptions';
  * and paste images from clipboard (Works on Chrome, Firefox, Edge, not on Safari)
  * @see https://quilljs.com/blog/building-a-custom-module/
  */
-export class ImageDrop {
+export default class ImageDrop {
 
 	/**
 	 * Instantiate the module given a quill instance and any options
@@ -33,7 +33,6 @@ export class ImageDrop {
 	 * @param {Event} evt
 	 */
 	handleDrop(evt) {
-        console.log('drop: ' + options);
 		evt.preventDefault();
 		if (evt.dataTransfer && evt.dataTransfer.files && evt.dataTransfer.files.length) {
 			if (document.caretRangeFromPoint) {
@@ -52,7 +51,6 @@ export class ImageDrop {
 	 * @param {Event} evt
 	 */
 	handlePaste(evt) {
-        console.log('paste: ' + options);
 		if (evt.clipboardData && evt.clipboardData.items && evt.clipboardData.items.length) {
 			this.readFiles(evt.clipboardData.items, dataUrl => {
 				const selection = this.quill.getSelection();
@@ -75,8 +73,8 @@ export class ImageDrop {
 	 */
 	insert(dataUrl) {
 		const index = (this.quill.getSelection() || {}).index || this.quill.getLength();
-		console.log(options);
-		if(this.options.callback !== null) {
+		console.log(this.options);
+		if(this.options.callback !== null && this.options.callback !== undefined) {
             this.options.callback(dataUrl);
         } else {
             this.quill.insertEmbed(index, 'image', dataUrl, 'user');
@@ -108,5 +106,8 @@ export class ImageDrop {
 			}
 		});
 	}
+}
 
+if (window.Quill) {
+    window.Quill.register('modules/imageDrop', ImageDrop);
 }

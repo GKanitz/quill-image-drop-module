@@ -75,7 +75,9 @@ export default class ImageDrop {
 		const index = (this.quill.getSelection() || {}).index || this.quill.getLength();
 		console.log(this.options);
 		if(this.options.callback !== null && this.options.callback !== undefined) {
-            this.options.callback(dataUrl);
+            this.options.callback(dataUrl, (url) => {
+                this.quill.insertEmbed(index, 'image', url, 'user');
+			});
         } else {
             this.quill.insertEmbed(index, 'image', dataUrl, 'user');
 		}

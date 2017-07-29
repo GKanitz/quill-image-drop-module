@@ -42,7 +42,11 @@ export default class ImageDrop {
 					selection.setBaseAndExtent(range.startContainer, range.startOffset, range.startContainer, range.startOffset);
 				}
 			}
-			this.readFiles(evt.dataTransfer.files, this.insert.bind(this));
+            if(this.options.callback !== null && this.options.callback !== undefined) {
+                this.options.callback(evt.dataTransfer.files, this.insert.bind(this));
+            } else {
+                this.readFiles(evt.dataTransfer.files, this.insert.bind(this));
+            }
 		}
 	}
 
@@ -52,18 +56,22 @@ export default class ImageDrop {
 	 */
 	handlePaste(evt) {
 		if (evt.clipboardData && evt.clipboardData.items && evt.clipboardData.items.length) {
-			this.readFiles(evt.clipboardData.items, dataUrl => {
-				const selection = this.quill.getSelection();
-				if (selection) {
-					// we must be in a browser that supports pasting (like Firefox)
-					// so it has already been placed into the editor
-				}
-				else {
-					// otherwise we wait until after the paste when this.quill.getSelection()
-					// will return a valid index
-					setTimeout(() => this.insert(dataUrl), 0);
-				}
-			});
+            if(this.options.callback !== null && this.options.callback !== undefined) {
+                this.options.callback(evt.dataTransfer.files, this.insert.bind(this));
+            } else {
+                this.readFiles(evt.clipboardData.items, dataUrl => {
+                    const selection = this.quill.getSelection();
+                    if (selection) {
+                        // we must be in a browser that supports pasting (like Firefox)
+                        // so it has already been placed into the editor
+                    }
+                    else {
+                        // otherwise we wait until after the paste when this.quill.getSelection()
+                        // will return a valid index
+                        setTimeout(() => this.insert(dataUrl), 0);
+                    }
+                });
+            }
 		}
 	}
 
@@ -73,14 +81,7 @@ export default class ImageDrop {
 	 */
 	insert(dataUrl) {
 		const index = (this.quill.getSelection() || {}).index || this.quill.getLength();
-		console.log(this.options);
-		if(this.options.callback !== null && this.options.callback !== undefined) {
-            this.options.callback(dataUrl, (url) => {
-                this.quill.insertEmbed(index, 'image', url, 'user');
-			});
-        } else {
-            this.quill.insertEmbed(index, 'image', dataUrl, 'user');
-		}
+		this.quill.insertEmbed(index, 'image', dataUrl, 'user');
 	}
 
 	/**
